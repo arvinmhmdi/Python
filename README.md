@@ -1,1 +1,53 @@
-# Python
+class ATM:
+    def __init__(self, balance=0):
+        self.balance = balance
+
+    def show_menu(self):
+        print("\n--- منوی ATM ---")
+        print("1. بررسی موجودی")
+        print("2. واریز پول")
+        print("3. برداشت پول")
+        print("4. خروج")
+
+    def check_balance(self):
+        print(f"موجودی فعلی شما: {self.balance} تومان")
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.balance += amount
+            print(f"{amount} تومان واریز شد.")
+        else:
+            print("مبلغ نامعتبر است.")
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            print("موجودی کافی نیست.")
+        elif amount <= 0:
+            print("مبلغ نامعتبر است.")
+        else:
+            self.balance -= amount
+            print(f"{amount} تومان برداشت شد.")
+
+def main():
+    atm = ATM(100000)  # شروع با 100 هزار تومان
+
+    while True:
+        atm.show_menu()
+        choice = input("انتخاب کنید (1-4): ")
+
+        if choice == '1':
+            atm.check_balance()
+        elif choice == '2':
+            amount = int(input("مبلغ واریزی را وارد کنید: "))
+            atm.deposit(amount)
+        elif choice == '3':
+            amount = int(input("مبلغ برداشتی را وارد کنید: "))
+            atm.withdraw(amount)
+        elif choice == '4':
+            print("خروج از سیستم. روز خوبی داشته باشید!")
+            break
+        else:
+            print("انتخاب نامعتبر است. لطفاً دوباره تلاش کنید.")
+
+if __name__ == "__main__":
+    main()
